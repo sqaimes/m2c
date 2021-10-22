@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <calculation>
+            <general>
+                <cron_expression>0 */2 * * *</cron_expression>
+            </general>
+        </calculation>
+    </default>
+</config>

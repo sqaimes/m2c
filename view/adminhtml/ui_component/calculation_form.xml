@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd" class="Lindenvalley\Calculation\Ui\Component\Form">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">calculation_form.calculation_form_data_source</item>
+            <item name="deps" xsi:type="string">calculation_form.calculation_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Calculation Configuration</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">calculation_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">save primary</item>
+                <item name="sort_order" xsi:type="number">20</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="calculation_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Lindenvalley\Calculation\Ui\DataProvider\Form\Calculation\Config</argument>
+            <argument name="name" xsi:type="string">calculation_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+                <item name="submit_url" path="*/*/save" xsi:type="url" />
+            </item>
+        </argument>
+    </dataSource>
+    <field name="store_id">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="label" xsi:type="string">Store Id</item>
+                <item name="formElement" xsi:type="string">hidden</item>
+                <item name="source" xsi:type="string">store_id</item>
+            </item>
+        </argument>
+    </field>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">General</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="collapsible" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <field name="europe_countries">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Lindenvalley\Calculation\Model\Source\Country</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string">Europe Countries</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="notice" xsi:type="string"><![CDATA[For formula please use {{is_europe}} for checks country of manufacturer from product.]]></item>
+                </item>
+            </argument>
+        </field>
+        <field name="can_round">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string">Can Round</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </field>
+        <field name="cron_expression">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string">Expression for Cron calculation</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="comment">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/text</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string">Notes for formula</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="value" xsi:type="string"><![CDATA[Conditions example: "[{{brand}}=='Adidas'?500:0]". Attributes example: "{{price}}/100"]]></item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <container name="config">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/dynamic-rows</item>
+                <item name="template" xsi:type="string">ui/dynamic-rows/templates/default</item>
+                <item name="componentType" xsi:type="string">dynamicRows</item>
+                <item name="recordTemplate" xsi:type="string">calculation_template</item>
+                <item name="addButtonLabel" xsi:type="string">Add</item>
+            </item>
+        </argument>
+        <container name="calculation_template">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Calculation Template</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
+                    <item name="isTemplate" xsi:type="boolean">true</item>
+                    <item name="is_collection" xsi:type="boolean">true</item>
+                    <item name="showFallbackReset" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="attribute_set_id">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Lindenvalley\Calculation\Model\Source\Product\AttributeSetId</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string">Attribute Set Id</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="attribute_code">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Lindenvalley\Calculation\Model\Source\Product\Attribute</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string">Attribute Code</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="attribute_option">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Lindenvalley\Calculation\Model\Source\Product\AttributeOption</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string">Attribute Value</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">attribute_option</item>
+                        <item name="filterBy" xsi:type="array">
+                            <item name="target" xsi:type="string">${ $.provider }:${ $.parentScope }.attribute_code</item>
+                            <item name="field" xsi:type="string">attribute_code</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <field name="formula">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string">Formula</item>
+                        <item name="formElement" xsi:type="string">textarea</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="attribute">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Lindenvalley\Calculation\Model\Source\Product\Attribute</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string">Attribute</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <actionDelete>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="componentType" xsi:type="string">actionDelete</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="fit" xsi:type="boolean">false</item>
+                        <item name="label" xsi:type="string">Actions</item>
+                        <item name="additionalClasses" xsi:type="string">data-grid-actions-cell</item>
+                        <item name="template" xsi:type="string">Magento_Backend/dynamic-rows/cells/action-delete</item>
+                    </item>
+                </argument>
+            </actionDelete>
+        </container>
+    </container>
+</form>

@@ -1,0 +1,26 @@
+{
+  "name": "lindenvalley/module-calculation",
+  "version": "1.0.1",
+  "description": "Module allow add calculation for something",
+  "require": {
+    "php": "~7.4.0",
+    "magento/product-community-edition": "^2.4",
+    "magento/framework": "*",
+    "lindenvalley/m2-base": "1.0.*",
+    "nxp/math-executor": "^2.1"
+  },
+  "support": {
+    "email": "sr@lindenvalley.de"
+  },
+  "type": "magento2-module",
+  "license": "proprietary",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Lindenvalley\\Calculation\\": ""
+    }
+  },
+  "minimum-stability": "dev"
+}

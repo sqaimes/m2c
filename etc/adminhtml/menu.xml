@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Lindenvalley_Calculation::config"
+             title="Calculation"
+             module="Lindenvalley_Calculation"
+             resource="Lindenvalley_Calculation::config"
+             parent="Magento_Backend::stores"
+             sortOrder="100" />
+        <add id="Lindenvalley_Calculation::config_edit"
+             title="Configuration"
+             module="Lindenvalley_Calculation"
+             sortOrder="10"
+             parent="Lindenvalley_Calculation::config"
+             action="calculation/calculation/config"
+             resource="Lindenvalley_Calculation::config" />
+    </menu>
+</config>
